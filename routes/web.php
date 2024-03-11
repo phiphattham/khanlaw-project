@@ -32,10 +32,18 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->group(function () {
+    // รายงานผล
     Route::get('dashboard', function () {
         return view('page.admin.dashboard');
     })->name('dashboard');
+    // จัดการหน้าเกี่ยวกับ
+    Route::get('manage-about', function () {
+        return view('page.admin.manage-about');
+    })->name('manage-about');
+    // จัดการห้องพัก
     Route::get('manage-room', [App\Http\Controllers\RoomController::class,'index'])->name('manage-room');
     Route::get('edit-room/{id}', [App\Http\Controllers\RoomController::class,'edit'])->name('edit-room');
     Route::get('delete-room/{id}', [App\Http\Controllers\RoomController::class,'destroy'])->name('delete-room');
+    // จัดการผู้ใช้
+    Route::get('manage-user', [App\Http\Controllers\UserController::class, 'index'])->name('manage-user');
 });

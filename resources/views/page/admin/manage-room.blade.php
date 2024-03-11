@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="mt-4">จัดการห้องพัก</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
         <li class="breadcrumb-item active">Room Management</li>
     </ol>
 
@@ -78,7 +78,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="text" class="form-label">รองรับ</label>
-                            <input type="text" class="form-control" id="support" placeholder="รองรับ" name="support" required>
+                            <input type="text" class="form-control" id="support" placeholder="รองรับ" name="support"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="text" class="form-label">บรรยากาศ</label>
@@ -92,7 +93,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="text" class="form-label">ราคา</label>
-                            <input type="text" class="form-control" id="price" placeholder="ราคา" name="price" required>
+                            <input type="text" class="form-control" id="price" placeholder="ราคา" name="price"
+                                required>
                         </div>
                 </div>
 

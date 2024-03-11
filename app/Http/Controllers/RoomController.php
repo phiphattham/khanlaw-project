@@ -30,7 +30,17 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // กำหนด validate
+        $this->validate($request, [
+            'number' => 'integer|required',
+            'type' => 'string|required',
+            'detail' => 'string|required',
+            'price' => 'integer|required',
+            'space' => 'string|required',
+            'vibe' => 'string|required',
+            'maximum' => 'string|required',
+            'image'=> 'required',
+        ]);
     }
 
     /**
