@@ -91,7 +91,7 @@
                             <a class="nav-link" href="{{ url('about') }}">เกี่ยวกับ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('roomlist') }}">รายการห้องพัก</a>
+                            <a class="nav-link" href="{{ route('roomlist') }}">รายการห้องพัก</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">ประวัติการจองห้องพัก</a>

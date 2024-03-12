@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
             'password' => '123456789',
         ]);
 
-        room::factory(10)->create();
+        room::factory(20)->create();
     }
 }

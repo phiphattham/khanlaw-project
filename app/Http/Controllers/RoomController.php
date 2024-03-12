@@ -48,7 +48,8 @@ class RoomController extends Controller
      */
     public function show(room $room)
     {
-        //
+        dd($room);
+        // return view(route('roomdetail'), [''=> $room,[''=> $roomId]]);
     }
 
     /**
