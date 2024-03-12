@@ -108,6 +108,7 @@
 
 
         <div>
+            @include('layouts.components.room-header')
             @yield('content')
         </div>
     </main>

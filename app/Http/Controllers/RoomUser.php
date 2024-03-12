@@ -10,9 +10,37 @@ class RoomUser extends Controller
     /**
      * แสดงรายการห้องพักทั้งหมด
      */
-    public function all(){
+    public function all()
+    {
         $rooms = room::paginate(4);
-        return view('page.room.room-list', ["rooms"=> $rooms]);
+        return view('page.room.room-list', ["rooms" => $rooms]);
+    }
+
+    /**
+     * แสดงรายการเต็นท์กระโจม
+     */
+    public function tent()
+    {
+        $rooms = room::where('type', 'tent')->paginate(4);
+        return view('page.room.room-tent', ['rooms' => $rooms]);
+    }
+
+    /**
+     * แสดงรายการ Hazel
+     */
+    public function hazel()
+    {
+        $rooms = room::where('type', 'hazel')->paginate(4);
+        return view('page.room.room-hazel', ['rooms' => $rooms]);
+    }
+
+    /**
+     * แสดงรายการ Holly
+     */
+    public function holly()
+    {
+        $rooms = room::where('type', 'holly')->paginate(4);
+        return view('page.room.room-holly', ['rooms' => $rooms]);
     }
 
     /**

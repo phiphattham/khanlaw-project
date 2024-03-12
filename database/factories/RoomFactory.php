@@ -16,9 +16,10 @@ class RoomFactory extends Factory
      */
     public function definition(): array
     {
+        $type = ['tent', 'hazel', 'holly'];
         return [
             'number' => rand(1, 100),
-            'type' => fake()->firstNameMale(),
+            'type' => $type[rand(0, count($type) -1)],
             'detail' => fake()->address(),
             'price' => rand(350, 500),
             'space' => '30',

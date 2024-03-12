@@ -4,48 +4,12 @@
 @endsection
 
 @section('content')
-
     <body style="background-color: #F2F2F2">
-        {{-- @php
-            dump($rooms);
-        @endphp --}}
-        {{-- Header imge-navbar --}}
-        <div>
-            <img src="{{ asset('img/index.jpg') }}" alt="อากาศ" class="crop-img">
-            <h1 class="welcome">Welcome</h1>
-            <h1 class="descript">คานหลาว วิวพอยท์</h1>
-        </div>
-
-        <nav class="navbar navbar-expand-lg mt-4">
-            <div class="container-fluid ">
-                <div class="col-1"></div>
-                <a class="navbar-brand ms-4" href="">ห้องพักทั้งหมด</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ url('') }}">เต็นท์กระโจม</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('') }}">ห้องพัก Hazel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('') }}">ห้องพัก Holly</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        {{-- End Header imge-navbar --}}
-
-        <div class="container">
+        <div class="container page-center">
             <div class="row">
                 @foreach ($rooms as $room)
                     <div class="col">
-                        <div class="card mt-5" style="width: 30rem;">
+                        <div class="card mt-3" style="width: 30rem;">
                             <img src="{{ $room->image }}" class="card-img-top" alt="เต็นท์กระโจม">
                             <div class="card-body">
                                 <h5 class="card-title border-bottom">ห้องพักที่ {{ $room->number }}</h5>
@@ -207,24 +171,11 @@
                     </div>
                 </div> --}}
             </div>
+        </div>
 
-
-
-
-
-
-
-            {{-- btn เลือกหน้า --}}
-            <footer class="page-center">
-                {{ $rooms->links() }}
-                {{-- <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href=>1</a></li>
-                        <li class="page-item"><a class="page-link" href={{ url('n2_allroom') }}>2</a></li>
-                        <li class="page-item"><a class="page-link" href={{ url('n3_allroom') }}>3</a></li>
-                    </ul>
-                </nav> --}}
-            </footer>
-
+        {{-- btn เลือกหน้า --}}
+        <footer class="d-flex justify-content-center">
+            {{ $rooms->links('pagination::bootstrap-4') }}
+        </footer>
     </body>
 @endsection
