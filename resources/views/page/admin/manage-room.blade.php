@@ -61,7 +61,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form method="POST" action="/create" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('createroom') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="formFile" class="form-label">เลือกรูปภาพ</label>
@@ -76,39 +76,40 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">เลขห้อง</label>
-                            <input type="text" class="form-control" id="room_number" placeholder="กรอกเลขห้อง"
-                                name="room_number" required>
+                            <label for="number" class="form-label">เลขห้อง</label>
+                            <input type="text" class="form-control" id="number" placeholder="กรอกเลขห้อง"
+                                name="number" required>
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">รองรับ</label>
-                            <input type="text" class="form-control" id="support" placeholder="รองรับ" name="support"
-                                required>
+                            <label for="maximum" class="form-label">รองรับ</label>
+                            <input type="number" class="form-control" id="maximum" placeholder="รองรับ" name="maximum"
+                                min="1" required>
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">บรรยากาศ</label>
-                            <input type="text" class="form-control" id="air" placeholder="กรอกบรรยากาศ"
-                                name="air" required>
+                            <label for="vibe" class="form-label">บรรยากาศ</label>
+                            <input type="text" class="form-control" id="vibe" placeholder="กรอกบรรยากาศ"
+                                name="vibe" required>
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">ขนาดของห้องพัก</label>
-                            <input type="text" class="form-control" id="space" placeholder="กรองขนาดของห้องพัก"
-                                name="space" required>
+                            <label for="space" class="form-label">ขนาดของห้องพัก</label>
+                            <input type="number" class="form-control" id="space" placeholder="กรองขนาดของห้องพัก"
+                                name="space" required min="0">
                         </div>
                         <div class="mb-3">
-                            <label for="text" class="form-label">ราคา</label>
-                            <input type="text" class="form-control" id="price" placeholder="ราคา" name="price"
-                                required>
+                            <label for="price" class="form-label">ราคา</label>
+                            <input type="number" class="form-control" id="price" placeholder="ราคา" name="price"
+                                required min="0">
                         </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">ยืนยัน</button>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
                     </form>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
+
+
         </div>
+    </div>
     </div>
 @endsection

@@ -24,12 +24,15 @@ Route::get('about', function () {
 });
 
 
-// Room Routes
+// Room Routes -> Read
 Route::get('room-list', [RoomController::class, 'all'])->name('roomlist');
 Route::get('room-tent', [RoomController::class, 'tent'])->name('roomtent');
 Route::get('room-hazel', [RoomController::class, 'hazel'])->name('roomhazel');
 Route::get('room-holly', [RoomController::class, 'holly'])->name('roomholly');
 Route::get('room-detail/{id}', [RoomController::class, 'show'])->name('roomdetail');
+
+// Room Routes -> Create Update Delete
+Route::post('room/create', [RoomController::class,'store'])->name('createroom');
 
 
 // Admin Routes

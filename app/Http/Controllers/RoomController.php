@@ -30,17 +30,20 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+        $room = new Room();
+        $room->number = $request->number;
         // กำหนด validate
-        $this->validate($request, [
-            'number' => 'integer|required',
-            'type' => 'string|required',
-            'detail' => 'string|required',
-            'price' => 'integer|required',
-            'space' => 'string|required',
-            'vibe' => 'string|required',
-            'maximum' => 'string|required',
-            'image' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'number' => 'integer|required',
+        //     'type' => 'string|required',
+        //     'detail' => 'string|required',
+        //     'price' => 'integer|required',
+        //     'space' => 'string|required',
+        //     'vibe' => 'string|required',
+        //     'maximum' => 'string|required',
+        //     'image' => 'required',
+        // ]);
     }
 
     /**
@@ -60,7 +63,7 @@ class RoomController extends Controller
     {
         // dd($id);
         $room = room::where('id', $id)->first();
-        return view('page.admin.manage-room-edit', ['room' => $room]);
+        return view('page.admin.room-edit', ['room' => $room]);
     }
 
     /**

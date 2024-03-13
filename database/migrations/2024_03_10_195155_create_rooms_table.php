@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('detail');
             $table->integer('price');
-            $table->string('space');
+            $table->float('space');
             $table->string('image');
             $table->string('vibe');
             $table->integer('maximum');
