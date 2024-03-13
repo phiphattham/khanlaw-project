@@ -42,7 +42,7 @@
                             <div class="card-body">
                                 <a type="button" href="#" class="btn btn-primary me-3">ราคา {{ $room->price }}
                                     บาท/คืน</a>
-                                <a href="#" class="card-link">ดูรายละเอียด</a>
+                                <a href="{{route('roomdetail', $room->id)}}" class="card-link">ดูรายละเอียด</a>
                             </div>
                         </div>
                     </div>

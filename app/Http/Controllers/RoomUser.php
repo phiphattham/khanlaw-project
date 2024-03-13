@@ -62,9 +62,11 @@ class RoomUser extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $room_detail = room::where('id', $id)->first();
+        // dd($room_detail);
+        return view('page.room.room-detail', ['room_detail' => $room_detail]);
     }
 
     /**

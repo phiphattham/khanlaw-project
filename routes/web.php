@@ -30,7 +30,7 @@ Route::get('room-list', [RoomUser::class, 'all'])->name('roomlist');
 Route::get('room-tent', [RoomUser::class, 'tent'])->name('roomtent');
 Route::get('room-hazel', [RoomUser::class, 'hazel'])->name('roomhazel');
 Route::get('room-holly', [RoomUser::class, 'holly'])->name('roomholly');
-Route::get('room-detail/{id}', [RoomController::class, 'show'])->name('roomdetail');
+Route::get('room-detail/{id}', [RoomUser::class, 'show'])->name('roomdetail');
 
 
 // Admin Routes
