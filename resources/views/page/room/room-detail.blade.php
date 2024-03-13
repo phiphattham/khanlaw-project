@@ -1,6 +1,6 @@
 @extends('layouts.room')
 @section('title')
-    ห้องพักทั้งหมด
+    รายละเอียดห้องที่ {{$room_detail->number}}
 @endsection
 
 @section('content')

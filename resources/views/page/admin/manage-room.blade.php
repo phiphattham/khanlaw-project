@@ -3,9 +3,10 @@
     จัดการห้องพัก
 @endsection
 @section('content')
-    <h1 class="mt-4">จัดการห้องพัก</h1>
+    <h1 class="mt-4">จัดการข้อมูลเว็บไซต์ / จัดการห้องพัก</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Website Data Management</li>
         <li class="breadcrumb-item active">Room Management</li>
     </ol>
 
@@ -42,6 +43,9 @@
 
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $rooms->links('pagination::bootstrap-4') }}
+    </div>
 
 
     {{-- Modal create room --}}

@@ -1,6 +1,6 @@
 @extends('layouts.room')
 @section('title')
-    ห้องพักเต็นท์กระโจม
+    ห้องพัก Holly
 @endsection
 @section('content')
 

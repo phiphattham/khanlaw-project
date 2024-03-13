@@ -12,7 +12,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::paginate(10);
         // dd($rooms);
         return view('page.admin.manage-room', ['rooms' => $rooms]);
     }
@@ -39,24 +39,28 @@ class RoomController extends Controller
             'space' => 'string|required',
             'vibe' => 'string|required',
             'maximum' => 'string|required',
-            'image'=> 'required',
+            'image' => 'required',
         ]);
     }
 
     /**
-     * Display the specified resource.
+     * แสดงรายละเอียดห้องพัก
      */
-    public function show(room $room)
+    public function show($id)
     {
-        //
+        $room_detail = room::where('id', $id)->first();
+        // dd($room_detail);
+        return view('page.room.room-detail', ['room_detail' => $room_detail]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(room $room)
+    public function edit($id)
     {
-        //
+        // dd($id);
+        $room = room::where('id', $id)->first();
+        return view('page.admin.manage-room-edit', ['room' => $room]);
     }
 
     /**
@@ -73,5 +77,41 @@ class RoomController extends Controller
     public function destroy(room $room)
     {
         //
+    }
+
+    /**
+     * แสดงรายการห้องพักทั้งหมด
+     */
+    public function all()
+    {
+        $rooms = room::paginate(4);
+        return view('page.room.room-list', ["rooms" => $rooms]);
+    }
+
+    /**
+     * แสดงรายการเต็นท์กระโจม
+     */
+    public function tent()
+    {
+        $rooms = room::where('type', 'tent')->paginate(4);
+        return view('page.room.room-tent', ['rooms' => $rooms]);
+    }
+
+    /**
+     * แสดงรายการ Hazel
+     */
+    public function hazel()
+    {
+        $rooms = room::where('type', 'hazel')->paginate(4);
+        return view('page.room.room-hazel', ['rooms' => $rooms]);
+    }
+
+    /**
+     * แสดงรายการ Holly
+     */
+    public function holly()
+    {
+        $rooms = room::where('type', 'holly')->paginate(4);
+        return view('page.room.room-holly', ['rooms' => $rooms]);
     }
 }

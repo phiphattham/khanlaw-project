@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\RoomUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +25,11 @@ Route::get('about', function () {
 
 
 // Room Routes
-Route::get('room-list', [RoomUser::class, 'all'])->name('roomlist');
-Route::get('room-tent', [RoomUser::class, 'tent'])->name('roomtent');
-Route::get('room-hazel', [RoomUser::class, 'hazel'])->name('roomhazel');
-Route::get('room-holly', [RoomUser::class, 'holly'])->name('roomholly');
-Route::get('room-detail/{id}', [RoomUser::class, 'show'])->name('roomdetail');
+Route::get('room-list', [RoomController::class, 'all'])->name('roomlist');
+Route::get('room-tent', [RoomController::class, 'tent'])->name('roomtent');
+Route::get('room-hazel', [RoomController::class, 'hazel'])->name('roomhazel');
+Route::get('room-holly', [RoomController::class, 'holly'])->name('roomholly');
+Route::get('room-detail/{id}', [RoomController::class, 'show'])->name('roomdetail');
 
 
 // Admin Routes
