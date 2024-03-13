@@ -12,7 +12,6 @@ class room extends Model
     protected $fillable = [
         'number',
         'type',
-        'detail',
         'price',
         'space',
         'image',

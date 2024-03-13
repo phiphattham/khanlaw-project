@@ -30,20 +30,26 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $room = new Room();
-        $room->number = $request->number;
         // กำหนด validate
         // $this->validate($request, [
         //     'number' => 'integer|required',
         //     'type' => 'string|required',
-        //     'detail' => 'string|required',
         //     'price' => 'integer|required',
         //     'space' => 'string|required',
         //     'vibe' => 'string|required',
         //     'maximum' => 'string|required',
         //     'image' => 'required',
         // ]);
+        // dd($request->all());
+        $room = new Room();
+        $room->number = $request->number;
+        $room->type = $request->type;
+        $room->price = $request->price;
+        $room->space = $request->space;
+        $room->vibe = $request->vibe;
+        $room->maximum = $request->maximum;
+        $room->save();
+        return redirect()->route('manage-room');
     }
 
     /**
@@ -79,7 +85,7 @@ class RoomController extends Controller
      */
     public function destroy(room $room)
     {
-        //
+        $room->delete();
     }
 
     /**

@@ -18,9 +18,8 @@ class RoomFactory extends Factory
     {
         $type = ['tent', 'hazel', 'holly'];
         return [
-            'number' => rand(1, 100),
+            'number' => rand(100, 999),
             'type' => $type[rand(0, count($type) -1)],
-            'detail' => fake()->address(),
             'price' => rand(350, 500),
             'space' => '30',
             'image' => fake()->imageUrl(),

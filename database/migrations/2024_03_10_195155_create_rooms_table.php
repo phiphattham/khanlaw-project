@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('number');
             $table->string('type');
-            $table->string('detail');
             $table->integer('price');
             $table->float('space');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('vibe');
             $table->integer('maximum');
             $table->timestamps();
