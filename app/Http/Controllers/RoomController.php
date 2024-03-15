@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -41,6 +42,10 @@ class RoomController extends Controller
         //     'image' => 'required',
         // ]);
         // dd($request->all());
+        $image = $request->file('image');
+        $newImageName = time() . '.' . $image->getClientOriginalExtension();
+        $path = Storage::putFileAs('public/images', $image, $newImageName);
+
         $room = new Room();
         $room->number = $request->number;
         $room->type = $request->type;
@@ -48,6 +53,7 @@ class RoomController extends Controller
         $room->space = $request->space;
         $room->vibe = $request->vibe;
         $room->maximum = $request->maximum;
+        $room->image = $path;
         $room->save();
         return redirect()->route('manage-room');
     }
@@ -81,11 +87,15 @@ class RoomController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * รับ param Id -> ลบห้องพัก -> Redirect() กลับไปที่่ manage-room
      */
-    public function destroy(room $room)
+    public function destroy($id)
     {
+        $room = room::where('id', $id)->first();
         $room->delete();
+        // dd($room);
+        $room->delete();
+        return redirect()->route('manage-room');
     }
 
     /**

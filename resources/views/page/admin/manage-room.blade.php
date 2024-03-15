@@ -64,8 +64,8 @@
                     <form method="POST" action="{{ route('createroom') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">เลือกรูปภาพ</label>
-                            <input class="form-control" type="file" id="formFile" name="formFile" required>
+                            <label for="image" class="form-label">เลือกรูปภาพ</label>
+                            <input class="form-control" type="file" id="image" name="image" required>
                         </div>
                         <div class="mb-3">
                             <select class="form-select" id="type" name="type" required>
