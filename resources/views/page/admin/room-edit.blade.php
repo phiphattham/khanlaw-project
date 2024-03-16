@@ -24,7 +24,9 @@
             </div>
 
             <div class="mb-3">
-                {{-- <label for="cars">ประเภทห้องพัก : </label> --}}
+                <label for="type" class="mb-2">
+                    ประเภทห้องพัก : <span class="badge rounded-pill text-bg-info">{{ $room->type }}</span>
+                </label>
                 <select id="type" name="type" class="form-select">
                     <option hidden>เลือกประเภทห้องพัก</option>
                     <option value="เต้นท์กระโจม">เต้นท์กระโจม</option>
