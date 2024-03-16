@@ -19,6 +19,7 @@
                 <th scope="col">ลำดับ</th>
                 <th scope="col">ประเภท</th>
                 <th scope="col">หมายเลขห้อง</th>
+                <th scope="col">บรรยากาศ</th>
                 <th scope="col">ราคา</th>
                 <th scope="col"><button type="button" class="btn btn-success" data-bs-toggle="modal"
                         data-bs-target="#createRoom">เพิ่ม</button></th>
@@ -32,6 +33,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $room->type }}</td>
                     <td>{{ $room->number }}</td>
+                    <td>{{ $room->vibe }}</td>
                     <td>{{ $room->price }}</td>
                     <td>
                         <a href="{{ route('edit-room', $room->id) }}" type="button" class="btn btn-warning">แก้ไข</a></th>

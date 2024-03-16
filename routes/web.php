@@ -31,10 +31,6 @@ Route::get('room-hazel', [RoomController::class, 'hazel'])->name('roomhazel');
 Route::get('room-holly', [RoomController::class, 'holly'])->name('roomholly');
 Route::get('room-detail/{id}', [RoomController::class, 'show'])->name('roomdetail');
 
-// Room Routes -> Create Update Delete
-Route::post('room/create', [RoomController::class,'store'])->name('createroom');
-
-
 // Admin Routes
 Auth::routes();
 
@@ -50,9 +46,11 @@ Route::prefix('admin')->group(function () {
         return view('page.admin.manage-about');
     })->name('manage-about');
     // จัดการห้องพัก
-    Route::get('manage-room', [App\Http\Controllers\RoomController::class, 'index'])->name('manage-room');
-    Route::get('edit-room/{id}', [App\Http\Controllers\RoomController::class, 'edit'])->name('edit-room');
-    Route::get('delete-room/{id}', [App\Http\Controllers\RoomController::class, 'destroy'])->name('delete-room');
+    Route::get('manage-room', [RoomController::class, 'index'])->name('manage-room');
+    Route::post('room/create', [RoomController::class, 'store'])->name('createroom');
+    Route::get('edit-room/{id}', [RoomController::class, 'edit'])->name('edit-room');   // หน้า view แก้ไขห้องพัก
+    Route::put('update-room/{id}', [RoomController::class, 'update'])->name('update-room'); // อัพเดทห้องพัก
+    Route::get('delete-room/{id}', [RoomController::class, 'destroy'])->name('delete-room');
     // จัดการผู้ใช้
     Route::get('manage-user', [App\Http\Controllers\UserController::class, 'index'])->name('manage-user');
 });

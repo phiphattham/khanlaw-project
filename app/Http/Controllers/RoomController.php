@@ -13,7 +13,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::paginate(10);
+        $rooms = Room::orderby('id', 'desc')->paginate(10);
         // dd($rooms);
         return view('page.admin.manage-room', ['rooms' => $rooms]);
     }
@@ -81,8 +81,34 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, room $room)
+    public function update(Request $request, $id)
     {
+        // dd($id);
+        $validate = $request->validate([
+            'number' => 'required',
+            'type' => 'required',
+            'price' => 'required',
+            'space' => 'required',
+            'vibe' => 'required',
+            'maximum' => 'required',
+        ]);
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $newImageName = time() . '.' . $image->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('public/images', $newImageName);
+            Room::where('id', $id)->update([
+                'number' => $validate['number'],
+                'type' => $validate['type'],
+                'price' => $validate['price'],
+                'space' => $validate['space'],
+                'vibe' => $validate['vibe'],
+                'maximum' => $validate['maximum'],
+                'image' => $path,
+            ]);
+        } else {
+            Room::where('id', $id)->update($validate);
+        }
+        return redirect()->route('manage-room');
         //
     }
 
