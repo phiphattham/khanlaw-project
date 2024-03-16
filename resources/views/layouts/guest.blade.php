@@ -69,10 +69,30 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 text-end">
-                <a type="button" class="btn btn-outline-primary me-2" href="{{ url('login') }}">Login</a>
-                <a type="button" class="btn btn-primary me-3" href="{{ url('register') }}">Sign-up</a>
-            </div>
+            @auth
+                <div class="col-md-3 text-end mx-5">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            @else
+                <div class="col-md-3 text-end">
+                    <a type="button" class="btn btn-outline-primary me-2" href="{{ url('login') }}">Login</a>
+                    <a type="button" class="btn btn-success me-3" href="{{ url('register') }}">Sign-up</a>
+                </div>
+            @endauth
         </header>
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -93,12 +113,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('roomlist') }}">รายการห้องพัก</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">ประวัติการจองห้องพัก</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">ประวัติส่วนตัว</a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="">ประวัติการจองห้องพัก</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">ประวัติส่วนตัว</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </div>
