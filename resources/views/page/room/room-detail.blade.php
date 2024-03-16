@@ -14,7 +14,7 @@
             <div class="card my-3 mx-5">
                 <div class="row">
                     <div class="col">
-                        <img src="{{ $room_detail->image }}" class="img-fluid rounded-start">
+                        <img src="{{ asset('storage/images/' . basename($room_detail->image)) }}" class="img-fluid rounded-start">
                     </div>
                     <div class="col">
                         <div class="card-body">

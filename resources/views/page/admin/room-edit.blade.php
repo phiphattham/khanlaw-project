@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div>
-        <h1 class="mt-4">แก้ไขห้องพัก</h1>
+        <h1 class="mt-4">แก้ไขห้องพัก <span class="badge text-bg-secondary">หมายเลขห้อง : {{ $room->number }}</span></h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item active">Website Data Management</li>

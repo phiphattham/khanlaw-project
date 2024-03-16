@@ -16,9 +16,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ลำดับ</th>
-                <th scope="col">ประเภท</th>
+                <th scope="col">#</th>
                 <th scope="col">หมายเลขห้อง</th>
+                <th scope="col">ประเภท</th>
                 <th scope="col">บรรยากาศ</th>
                 <th scope="col">ราคา</th>
                 <th scope="col"><button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -30,9 +30,13 @@
 
             @foreach ($rooms as $room)
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $room->type }}</td>
+                    {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
+                    <td>
+                        <img src="{{ asset('storage/images/' . basename($room->image)) }}" alt="เลขห้อง: {{$room->number}}" width="50px"
+                            height="50px" style="object-fit: contain">
+                    </td>
                     <td>{{ $room->number }}</td>
+                    <td>{{ $room->type }}</td>
                     <td>{{ $room->vibe }}</td>
                     <td>{{ $room->price }}</td>
                     <td>

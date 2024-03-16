@@ -12,7 +12,7 @@
                     <div class="col">
                         <div class="card mt-3" style="width: 30rem;">
                             <img src="{{ asset('storage/images/' . basename($room->image)) }}" class="card-img-top"
-                                alt="เต็นท์กระโจม">
+                                alt="เต็นท์กระโจม" width="640px" height="480px" style="object-fit: contain">
                             <div class="card-body">
                                 <h5 class="card-title border-bottom">ห้องพักที่ {{ $room->number }}</h5>
                             </div>
