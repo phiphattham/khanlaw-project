@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Mail\SendMail;
+use App\Models\Booking;
+use App\Models\Customer;
+use App\Models\room;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
+class BookingController extends Controller
+{
+    public function index()
+    {
+        $content = [
+            'subject' => 'Test Subject',
+            'body' => 'test bodyyyyyyyyyy',
+        ];
+
+        Mail::to('jakkapatintarat92@gmail.com')->send(new SendMail($content));
+
+        return 'Email sent';
+    }
+
+    public function booking(Request $request, $id)
+    {
+        // dd($request);
+        $userId = Auth::user()->id;
+
+        $booking = new Booking();
+
+        $booking->user_id = $userId;
+        $booking->room_id = $id;
+        $booking->check_in = $request->check_in;
+        $booking->check_out = $request->check_out;
+        $booking->amount = $request->amount;
+        $booking->total = $request->total;
+
+        $booking->save();
+
+        $room = room::find($id);
+        return view('page.room.booking.check-out', ['booking_data' => $booking, 'room_data' => $room]);
+    }
+
+    public function customercheck(Request $request, $booking_id)
+    {
+        $customer = new Customer();
+
+        $customer->f_name = $request->f_name;
+        $customer->l_name = $request->l_name;
+        $customer->tel = $request->tel;
+        $customer->email = $request->email;
+        $customer->identity_number = $request->identity_number;
+        $customer->booking_id = $booking_id;
+
+        $customer->save();
+
+        return redirect()->route('bookinghistory');
+    }
+
+    public function history()
+    {
+        $userId = Auth::user()->id;
+        $booking = Booking::where('user_id', $userId)->get();
+
+        return view('page.booking-history', ['booking' => $booking,]);
+    }
+}

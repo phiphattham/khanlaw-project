@@ -18,9 +18,23 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'name' => 'Test Admin',
+            'username' => 'KhanlawAdmin',
             'email' => 'admin@example.com',
             'password' => '123456789',
+            'f_name' => 'Khanlaw',
+            'l_name' => 'Viewpoint',
+            'role' => 'admin',
+            'sex' => 'male',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'username' => 'KhanlawUser',
+            'email' => 'user@example.com',
+            'password' => '123456789',
+            'f_name' => 'User',
+            'l_name' => 'Khanlaw',
+            'role' => 'user',
+            'sex' => 'female',
         ]);
 
         room::factory(20)->create();
