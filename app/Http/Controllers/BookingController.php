@@ -60,6 +60,13 @@ class BookingController extends Controller
         return redirect()->route('bookinghistory');
     }
 
+    public function roomresult(Request $request, $booking_id)
+    {
+        // สรุปผล ยืนยัน -> ส่งเมล์ -> history
+        // หน้าสรุปผล มียืนยัน แก้ไข->back
+    }
+
+
     public function history()
     {
         $userId = Auth::user()->id;
