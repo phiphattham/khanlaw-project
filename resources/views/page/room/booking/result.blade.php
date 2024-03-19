@@ -101,7 +101,8 @@
                             @csrf
                             <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                             <input type="hidden" name="customer_id" value="{{ $customer->id }}">
-                            <button type="button" class="btn btn-danger">ยกเลิก</button>
+                            <input type="hidden" name="email" value="{{$customer->email}}">
+                            <button href="#" type="button" class="btn btn-danger">แก้ไขข้อมูล</button>
                             <button type="submit" class="btn btn-success"
                                 onclick="return confirm('คุณต้องการยืนยันการจองนี้หรือไม่')">ยืนยัน</button>
                         </form>

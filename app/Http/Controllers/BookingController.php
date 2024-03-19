@@ -46,20 +46,41 @@ class BookingController extends Controller
 
     public function customercheck(Request $request, $booking_id)
     {
-        $customer = new Customer();
+        // $customer = new Customer();
 
-        $customer->f_name = $request->f_name;
-        $customer->l_name = $request->l_name;
-        $customer->tel = $request->tel;
-        $customer->email = $request->email;
-        $customer->identity_number = $request->identity_number;
-        $customer->booking_id = $booking_id;
-        $customer->save();
+        // $customer->f_name = $request->f_name;
+        // $customer->l_name = $request->l_name;
+        // $customer->tel = $request->tel;
+        // $customer->email = $request->email;
+        // $customer->identity_number = $request->identity_number;
+        // $customer->booking_id = $booking_id;
+        // $customer->save();
 
-        $booking = Booking::with('room')->with('user')->find($booking_id);
+        // $booking = Booking::with('room')->with('user')->find($booking_id);
 
-        // ส่งผลสรุปไปที่หน้า result
-        return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
+        // // ส่งผลสรุปไปที่หน้า result
+        // return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
+
+        $haveBooking = Customer::where('booking_id', $booking_id)->latest()->first();
+        // dd($haveBooking);
+        if (!$haveBooking) {
+            $customer = new Customer();
+            $customer->f_name = $request->f_name;
+            $customer->l_name = $request->l_name;
+            $customer->tel = $request->tel;
+            $customer->email = $request->email;
+            $customer->identity_number = $request->identity_number;
+            $customer->booking_id = $booking_id;
+            $customer->save();
+
+            $booking = Booking::with('room')->with('user')->find($booking_id);
+
+            // ส่งผลสรุปไปที่หน้า result
+            return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
+        } else {
+            $booking = Booking::with('room')->with('user')->find($booking_id);
+            return view('page.room.booking.result', ['customer'=> $haveBooking, 'booking' => $booking]);
+        }
     }
 
     // เมื่อหน้า result กดยืนยันจะต้องส่งเมล์ไปหาอีเมล์ที่กรอกเข้ามา
@@ -70,7 +91,9 @@ class BookingController extends Controller
         $customer_id = $request->customer_id;
         // สรุปผล ยืนยัน -> ส่งเมล์ -> history
         $booking = Booking::with('room')->with('user')->find($booking_id);
-        $customer = Customer::find($customer_id);
+        $customer = Customer::with('booking')->find($customer_id);
+        $email = $request->email;
+        dd($customer->email);
 
         // ส่งอีเมล์
         // $content = [
@@ -81,7 +104,6 @@ class BookingController extends Controller
         // Mail::to('jakkapatintarat92@gmail.com')->send(new SendMail($content));
 
         // return 'Email sent';
-        dd($customer);
         // หน้าสรุปผล มียืนยัน แก้ไข->back
     }
 
