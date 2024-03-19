@@ -17,4 +17,9 @@ class Customer extends Model
         'identity_number',
         'booking_id'
     ];
+
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 }

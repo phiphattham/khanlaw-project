@@ -54,15 +54,34 @@ class BookingController extends Controller
         $customer->email = $request->email;
         $customer->identity_number = $request->identity_number;
         $customer->booking_id = $booking_id;
-
         $customer->save();
 
-        return redirect()->route('bookinghistory');
+        $booking = Booking::with('room')->with('user')->find($booking_id);
+
+        // ส่งผลสรุปไปที่หน้า result
+        return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
     }
 
-    public function roomresult(Request $request, $booking_id)
+    // เมื่อหน้า result กดยืนยันจะต้องส่งเมล์ไปหาอีเมล์ที่กรอกเข้ามา
+    public function sendemail(Request $request)
     {
+        // dd($request);
+        $booking_id = $request->booking_id;
+        $customer_id = $request->customer_id;
         // สรุปผล ยืนยัน -> ส่งเมล์ -> history
+        $booking = Booking::with('room')->with('user')->find($booking_id);
+        $customer = Customer::find($customer_id);
+
+        // ส่งอีเมล์
+        // $content = [
+        //     'subject' => 'Test Subject',
+        //     'body' => 'test bodyyyyyyyyyy',
+        // ];
+
+        // Mail::to('jakkapatintarat92@gmail.com')->send(new SendMail($content));
+
+        // return 'Email sent';
+        dd($customer);
         // หน้าสรุปผล มียืนยัน แก้ไข->back
     }
 

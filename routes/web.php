@@ -38,7 +38,8 @@ Route::post('checkout/{booking_id}', [BookingController::class,'customercheck'])
 Route::get('booking-history', [BookingController::class, 'history'])->name('bookinghistory');
 Route::get('booking/result', function () {
     return view('page.room.booking.result');
-});
+})->name('result');
+Route::post('booking/result/sendemail', [BookingController::class,'sendemail'])->name('sendemail');
 
 // Admin Routes
 Auth::routes();
