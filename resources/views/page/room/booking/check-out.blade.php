@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.overflow')
 @section('title')
     Checkout
 @endsection
