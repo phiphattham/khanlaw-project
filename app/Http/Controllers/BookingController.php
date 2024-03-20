@@ -46,21 +46,6 @@ class BookingController extends Controller
 
     public function customercheck(Request $request, $booking_id)
     {
-        // $customer = new Customer();
-
-        // $customer->f_name = $request->f_name;
-        // $customer->l_name = $request->l_name;
-        // $customer->tel = $request->tel;
-        // $customer->email = $request->email;
-        // $customer->identity_number = $request->identity_number;
-        // $customer->booking_id = $booking_id;
-        // $customer->save();
-
-        // $booking = Booking::with('room')->with('user')->find($booking_id);
-
-        // // ส่งผลสรุปไปที่หน้า result
-        // return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
-
         $haveBooking = Customer::where('booking_id', $booking_id)->latest()->first();
         // dd($haveBooking);
         if (!$haveBooking) {
@@ -77,8 +62,17 @@ class BookingController extends Controller
 
             // ส่งผลสรุปไปที่หน้า result
             return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
-        } else {
+        } else { // ถ้ามีข้อมูลการจองอยู่แล้วให้อัพเดทข้อมูลใหม่เข้าไป
+            $haveBooking->update([
+                'f_name' => $request->f_name,
+                'l_name' => $request->l_name,
+                'tel' => $request->tel,
+                'email' => $request->email,
+                'identity_number' => $request->identity_number,
+                'booking_id' => $booking_id,
+            ]);
             $booking = Booking::with('room')->with('user')->find($booking_id);
+            // dd($haveBooking);
             return view('page.room.booking.result', ['customer' => $haveBooking, 'booking' => $booking]);
         }
     }
@@ -106,10 +100,8 @@ class BookingController extends Controller
 
         Mail::to($email)->send(new SendMail($content));
 
-        return 'Email sent';
-        // หน้าสรุปผล มียืนยัน แก้ไข->back
+        return redirect()->route('bookinghistory');
     }
-
 
     public function history()
     {
@@ -117,5 +109,11 @@ class BookingController extends Controller
         $booking = Booking::where('user_id', $userId)->get();
 
         return view('page.booking-history', ['booking' => $booking,]);
+    }
+
+    public function adminbooking()
+    {
+        $booking = Booking::with('room')->with('user')->orderby('id', 'desc')->get();
+        return view('page.admin.manage-booking', ['booking' => $booking]);
     }
 }

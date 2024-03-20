@@ -97,12 +97,13 @@
                         *หมายเหตุ การชำระเงินลูกค้าต้องชำระเงินที่หน้าเคาเตอร์ตอนเข้าเช็คอินเท่านั้น
                     </li>
                     <li class="list-group-itemd-flex d-grid gap-2 d-md-flex justify-content-md-end me-3 my-2">
+                        <button type="button" onclick="return window.history.back()"
+                            class="btn btn-danger">แก้ไขข้อมูล</button>
                         <form action="{{ route('sendemail') }}" method="post">
                             @csrf
                             <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                             <input type="hidden" name="customer_id" value="{{ $customer->id }}">
-                            <input type="hidden" name="email" value="{{$customer->email}}">
-                            <button href="#" type="button" class="btn btn-danger">แก้ไขข้อมูล</button>
+                            <input type="hidden" name="email" value="{{ $customer->email }}">
                             <button type="submit" class="btn btn-success"
                                 onclick="return confirm('คุณต้องการยืนยันการจองนี้หรือไม่')">ยืนยัน</button>
                         </form>

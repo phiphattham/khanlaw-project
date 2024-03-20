@@ -33,13 +33,13 @@ Route::get('room-detail/{id}', [RoomController::class, 'show'])->name('roomdetai
 
 // Booking Route
 Route::post('booking/{id}', [BookingController::class, 'booking'])->name('booking'); //รับ id ห้องพัก
-Route::get('checkout/{id}', [BookingController::class, 'checkout'])->name('checkout');
-Route::post('checkout/{booking_id}', [BookingController::class,'customercheck'])->name('customercheck');
+// Route::get('checkout/{id}', [BookingController::class, 'checkout'])->name('checkout');
+Route::post('checkout/{booking_id}', [BookingController::class, 'customercheck'])->name('customercheck');
 Route::get('booking-history', [BookingController::class, 'history'])->name('bookinghistory');
 Route::get('booking/result', function () {
     return view('page.room.booking.result');
 })->name('result');
-Route::post('booking/result/sendemail', [BookingController::class,'sendemail'])->name('sendemail');
+Route::post('booking/result/sendemail', [BookingController::class, 'sendemail'])->name('sendemail');
 
 // Admin Routes
 Auth::routes();
@@ -63,6 +63,7 @@ Route::prefix('admin')->middleware(['auth', 'checkrole'])->group(function () {
     Route::get('delete-room/{id}', [RoomController::class, 'destroy'])->name('delete-room');
     // จัดการผู้ใช้
     Route::get('manage-user', [App\Http\Controllers\UserController::class, 'index'])->name('manage-user');
+    Route::get('manage-booking', [App\Http\Controllers\BookingController::class, 'adminbooking'])->name('managebooking');
 });
 
 Route::get('send-mail', [BookingController::class, 'index']);

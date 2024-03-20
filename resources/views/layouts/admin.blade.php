@@ -62,6 +62,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
+                        <a class="nav-link" href="{{ route('managebooking') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-th-list"></i></div>
+                            รายการจอง
+                        </a>
 
                         <div class="sb-sidenav-menu-heading">Admin menu</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
