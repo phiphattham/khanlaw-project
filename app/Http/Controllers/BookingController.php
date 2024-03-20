@@ -79,7 +79,7 @@ class BookingController extends Controller
             return view('page.room.booking.result', ['customer' => $customer, 'booking' => $booking]);
         } else {
             $booking = Booking::with('room')->with('user')->find($booking_id);
-            return view('page.room.booking.result', ['customer'=> $haveBooking, 'booking' => $booking]);
+            return view('page.room.booking.result', ['customer' => $haveBooking, 'booking' => $booking]);
         }
     }
 
@@ -93,17 +93,20 @@ class BookingController extends Controller
         $booking = Booking::with('room')->with('user')->find($booking_id);
         $customer = Customer::with('booking')->find($customer_id);
         $email = $request->email;
-        dd($customer->email);
+        // dd($booking);
 
         // ส่งอีเมล์
-        // $content = [
-        //     'subject' => 'Test Subject',
-        //     'body' => 'test bodyyyyyyyyyy',
-        // ];
+        $content = [
+            'customer' => 'สวัสดีคุณ ' . $customer->email . ' อีเมล์นี้มาจากระบบจองห้องพัก Khanlaw Viewpoint',
+            'check_in' => $booking->check_in,
+            'check_out' => $booking->check_out,
+            'total' => $booking->total,
+            'room_number' => $booking->room->number,
+        ];
 
-        // Mail::to('jakkapatintarat92@gmail.com')->send(new SendMail($content));
+        Mail::to($email)->send(new SendMail($content));
 
-        // return 'Email sent';
+        return 'Email sent';
         // หน้าสรุปผล มียืนยัน แก้ไข->back
     }
 
