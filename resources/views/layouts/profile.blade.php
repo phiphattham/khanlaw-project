@@ -22,34 +22,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<style>
-    .welcome {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .descript {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .crop-img {
-        object-fit: cover;
-        object-position: center;
-        height: 500px;
-        width: 100%;
-    }
-
-    .page-center {
-        padding: 3rem;
-        justify-content: center;
-        display: flex;
-    }
-</style>
+@yield('style')
 
 <body style="background-color: #F2F2F2">
     <main>
@@ -133,7 +106,6 @@
 
 
         <div>
-            @include('layouts.components.room-header')
             @yield('content')
         </div>
     </main>

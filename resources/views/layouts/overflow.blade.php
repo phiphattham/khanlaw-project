@@ -113,10 +113,10 @@
                         </li>
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="">ประวัติการจองห้องพัก</a>
+                                <a class="nav-link" href="{{ route('bookinghistory') }}">ประวัติการจองห้องพัก</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">ประวัติส่วนตัว</a>
+                                <a class="nav-link" href="{{ route('profile') }}">ประวัติส่วนตัว</a>
                             </li>
                         @endauth
                     </ul>

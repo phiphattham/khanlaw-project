@@ -29,8 +29,12 @@
         <li class="breadcrumb-item active">About page Management</li>
     </ol>
     <div id="container">
-        <form action="">
-            <div id="editor">
+        <form action="{{ route('createabout') }}" method="POST">
+            @csrf
+            <textarea id="editor" name="content">
+            </textarea>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success my-3" type="submit" onclick="return confirm('คุณต้องการเปลี่ยนแปลงหน้า (เกี่ยวกับ) หรือไม่')">ยืนยัน</button>
             </div>
         </form>
     </div>

@@ -106,7 +106,7 @@ class BookingController extends Controller
     public function history()
     {
         $userId = Auth::user()->id;
-        $booking = Booking::where('user_id', $userId)->get();
+        $booking = Booking::orderby('id', 'desc')->where('user_id', $userId)->paginate(4);
 
         return view('page.booking-history', ['booking' => $booking,]);
     }
@@ -115,5 +115,12 @@ class BookingController extends Controller
     {
         $booking = Booking::with('room')->with('user')->orderby('id', 'desc')->get();
         return view('page.admin.manage-booking', ['booking' => $booking]);
+    }
+
+    public function adminbookingdetail($id)
+    {
+        $booking = Booking::where('id', $id)->first();
+        $customer = Customer::where('booking_id', $id)->first();
+        return view('page.admin.booking-detail', ['booking' => $booking, 'customer' => $customer]);
     }
 }

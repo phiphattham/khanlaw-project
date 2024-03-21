@@ -11,25 +11,176 @@
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
         <li class="breadcrumb-item active">User Management</li>
     </ol>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <table class="table">
         <thead class="table-light">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>created_at</th>
-            <th hidden>#######</th>
+            <th>username</th>
+            <th>email</th>
+            <th>full name</th>
+            <th>sex</th>
+            <th>role</th>
+            <th scope="col"><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#createUser">เพิ่ม</button></th>
         </thead>
         @foreach ($users as $user)
             <tbody>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
+                <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
+                <td>{{ $user->f_name }} {{ $user->l_name }}</td>
+                <td>{{ $user->sex }}</td>
+                <td>{{ $user->role }}</td>
                 <td>
-                    <a href="#" class="btn btn-warning">แก้ไข</a>
-                    <a href="#" class="btn btn-danger">ลบ</a>
+                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUser">แก้ไข</a>
+                    <a href="{{ route('delete-user', $user->id) }}" class="btn btn-danger"
+                        onclick="return confirm('ต้องการลบ user นี้หรือไม่')">ลบ</a>
                 </td>
             </tbody>
+
+            <div class="modal fade" id="editUser">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h6>แก้ไขข้อมูลผู้ใช้</h6>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form method="POST" action="{{ route('edituser', $user->id) }}">
+                                @method('PUT')
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">ชื่อผู้ใช้</label>
+                                    <input type="text" class="form-control" id="username" value="{{ $user->username }}"
+                                        name="username" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">อีเมล์</label>
+                                    <input type="email" class="form-control" id="email" value="{{ $user->email }}"
+                                        name="email" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">รหัสผ่าน</label>
+                                    <input type="password" class="form-control" id="password" placeholder="password"
+                                        name="password" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="f_name" class="form-label">ชื่อ</label>
+                                    <input type="text" class="form-control" id="f_name" value="{{ $user->f_name }}"
+                                        name="f_name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="l_name" class="form-label">นามสกุล</label>
+                                    <input type="text" class="form-control" id="l_name" value="{{ $user->l_name }}"
+                                        name="l_name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sex" class="form-label">เพศ</label>
+                                    <select class="form-select" id="sex" name="sex">
+                                        <option selected hidden>{{ $user->sex }}</option>
+                                        <option value="male">ชาย</option>
+                                        <option value="female">หญิง</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">ตำแหน่ง</label>
+                                    <select class="form-select" id="role" name="role">
+                                        <option selected hidden>{{ $user->role }}</option>
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                            </form>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         @endforeach
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $users->links('pagination::bootstrap-4') }}
+    </div>
+
+    {{-- Modal create user --}}
+    <div class="modal fade" id="createUser">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6>เพิ่มข้อมูลผู้ใช้</h6>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('createuser') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="username" class="form-label">ชื่อผู้ใช้</label>
+                            <input type="text" class="form-control" id="username" placeholder="username"
+                                name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">อีเมล์</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email"
+                                name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">รหัสผ่าน</label>
+                            <input type="password" class="form-control" id="password" placeholder="password"
+                                name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="f_name" class="form-label">ชื่อ</label>
+                            <input type="text" class="form-control" id="f_name" placeholder="Firstname"
+                                name="f_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="l_name" class="form-label">นามสกุล</label>
+                            <input type="text" class="form-control" id="l_name" placeholder="Lastname"
+                                name="l_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sex" class="form-label">เพศ</label>
+                            <select class="form-select" id="sex" name="sex" required>
+                                <option hidden>เลือกเพศ</option>
+                                <option value="male">ชาย</option>
+                                <option value="female">หญิง</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label">ตำแหน่ง</label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option hidden>เลือกตำแหน่ง</option>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                    </form>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 @endsection
