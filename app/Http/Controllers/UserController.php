@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
+        dd($request);
         if ($request->password != null) {
             $user = User::find($id);
             $user->update([

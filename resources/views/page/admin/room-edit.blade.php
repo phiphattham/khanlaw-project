@@ -29,7 +29,7 @@
                 </label>
                 <select id="type" name="type" class="form-select">
                     <option hidden>เลือกประเภทห้องพัก</option>
-                    <option value="เต้นท์กระโจม">เต้นท์กระโจม</option>
+                    <option value="tent">เต้นท์กระโจม</option>
                     <option value="Holly">Holly</option>
                     <option value="Hazel">Hazel</option>
                 </select>

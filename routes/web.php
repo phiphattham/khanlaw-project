@@ -70,6 +70,9 @@ Route::prefix('admin')->middleware(['auth', 'checkrole'])->group(function () {
     Route::get('delete-user/{user_id}', [UserController::class, 'destroy'])->name('delete-user');
     Route::get('manage-booking', [App\Http\Controllers\BookingController::class, 'adminbooking'])->name('managebooking');
     Route::get('booking-detail/{booking_id}', [App\Http\Controllers\BookingController::class, 'adminbookingdetail'])->name('bookingdetail');
+    Route::get('edituser', function () {
+        return view('page.admin.user-edit');
+    });
 });
 
 Route::get('send-mail', [BookingController::class, 'index']);

@@ -44,6 +44,7 @@
                 </td>
             </tbody>
 
+            {{-- edit modal --}}
             <div class="modal fade" id="editUser">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -92,7 +93,7 @@
                                 <div class="mb-3">
                                     <label for="role" class="form-label">ตำแหน่ง</label>
                                     <select class="form-select" id="role" name="role">
-                                        <option selected hidden>{{ $user->role }}</option>
+                                        <option selected hidden>เลือกตำแหน่ง</option>
                                         <option value="user">User</option>
                                         <option value="admin">Admin</option>
                                     </select>
