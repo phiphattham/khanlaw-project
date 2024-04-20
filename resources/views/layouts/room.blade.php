@@ -57,7 +57,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom"
             style="background-color: #F2F2F2">
 
-            <div>
+            <div class="d-none d-md-block">
                 <ul>
                     <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
